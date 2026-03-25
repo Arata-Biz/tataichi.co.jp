@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社たた市 | 伝統と革新の畳・内装</title>
+    <meta name="description" content="大阪府堺市の株式会社たた市。匠の技が織りなす和の空間。畳・襖・クロス・内装工事ならお任せください。">
+    <!-- SEO & Open Graph Meta Tags -->
+    <meta property="og:title" content="株式会社たた市 | 伝統と革新の畳・内装">
+    <meta property="og:description" content="大阪府堺市の株式会社たた市。匠の技が織りなす和の空間。畳・襖・クロス・内装工事ならお任せください。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tataichi.co.jp/">
+    <meta property="og:image" content="https://tataichi.co.jp/about-img.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 0. PRELOADER --- */
+        #preloader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: #F4F7F0; display: flex;
+            align-items: center; justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #preloader.hidden { opacity: 0; visibility: hidden; }
+        .spinner {
+            width: 40px; height: 40px;
+            border: 3px solid rgba(156, 185, 79, 0.2);
+            border-top-color: #9CB94F;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* --- 1. CORE SETTINGS & VARIABLES --- */
+        :root {
+            /* Palette: Wakakusa-iro (Fresh Young Grass) */
+            --primary: #9CB94F;       /* Xanh cỏ non */
+            --primary-dark: #7D9739;  /* Xanh Oliu đậm */
+            --accent: #D4AF37;        /* Vàng kim */
+            
+            /* UPDATED: Loại bỏ màu đen, dùng tông Xám Xanh Đen tự nhiên hơn */
+            --text-main: #454D3D;     /* Thay cho màu đen #333 */
+            --text-sub: #757A70;      /* Xám nhẹ nhàng hơn */
+            --footer-bg: #4E5E48;     /* Xanh rêu trầm thay cho đen ở footer */
+            
+            --white: #FFFFFF;
+            --bg-light: #F4F7F0;      /* Nền xanh rất nhạt */
+            
+            /* Dimensions & Effects */
+            --header-h: 80px;
+            --radius: 8px;
+            --shadow: 0 10px 30px rgba(78, 94, 72, 0.15); /* Bóng đổ màu rêu nhẹ */
+            --font-sans: 'Noto Sans JP', sans-serif;
+            --font-serif: 'Noto Serif JP', serif;
+        }
+
+        /* Reset & Base */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            line-height: 1.8;
+            background-color: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+        button, input, textarea { font-family: inherit; }
+
+        /* --- 2. UTILITY CLASSES --- */
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 100px 0; }
+        .text-center { text-align: center; }
+        
+        /* Typography */
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-tag {
+            display: inline-block;
+            font-size: 0.85rem; font-weight: 700;
+            color: var(--primary-dark); /* Đậm hơn một chút để dễ đọc */
+            background: rgba(156, 185, 79, 0.15);
+            padding: 6px 18px; border-radius: 50px;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            margin-bottom: 15px;
+        }
+        .section-title { font-family: var(--font-serif); font-size: 2.2rem; margin-bottom: 15px; color: var(--text-main); }
+        .section-desc { color: var(--text-sub); max-width: 600px; margin: 0 auto; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 14px 32px; border-radius: 50px;
+            font-weight: 500; letter-spacing: 0.05em; cursor: pointer;
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .btn-primary {
+            background-color: var(--primary); color: var(--white);
+            border: 1px solid var(--primary);
+            box-shadow: 0 4px 15px rgba(156, 185, 79, 0.4);
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-dark); border-color: var(--primary-dark);
+            transform: translateY(-2px); box-shadow: 0 8px 25px rgba(156, 185, 79, 0.5);
+        }
+        .btn-outline {
+            background: transparent; color: var(--white);
+            border: 1px solid rgba(255,255,255,0.8);
+            backdrop-filter: blur(4px);
+        }
+        .btn-outline:hover { background: var(--white); color: var(--primary); }
+
+        /* Animations */
+        .fade-in-up { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* --- 3. HEADER --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; height: var(--header-h);
+            z-index: 999; display: flex; align-items: center;
+            transition: 0.3s ease;
+        }
+        header.scrolled {
+            background: rgba(255,255,255,0.98); box-shadow: 0 2px 20px rgba(78, 94, 72, 0.05);
+            height: 70px;
+        }
+        header.header-hidden { transform: translateY(-100%); }
+
+        nav { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        
+        .logo {
+            font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700;
+            color: var(--white); letter-spacing: 0.1em; z-index: 1000;
+        }
+        header.scrolled .logo, body.menu-open .logo { color: var(--primary-dark); }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a {
+            font-weight: 500; font-size: 0.95rem; color: rgba(255,255,255,0.95);
+            position: relative; padding: 5px 0;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 0; height: 2px; background: var(--accent); transition: 0.3s;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        
+        header.scrolled .nav-links a { color: var(--text-main); }
+        header.scrolled .nav-links a.active { color: var(--primary); }
+
+        .mobile-menu-btn { display: none; color: var(--white); font-size: 1.5rem; cursor: pointer; z-index: 1000; }
+        header.scrolled .mobile-menu-btn, body.menu-open .mobile-menu-btn { color: var(--primary); }
+
+        /* --- 4. HERO SECTION --- */
+        .hero {
+            height: 100vh; position: relative;
+            display: flex; align-items: center; justify-content: center;
+            background: url('hero-bg.jpg') center/cover no-repeat fixed;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            /* Gradient ấm áp hơn, bớt đen */
+            background: linear-gradient(to right, rgba(69, 77, 61, 0.7) 0%, rgba(69, 77, 61, 0.4) 60%, rgba(69, 77, 61, 0.1) 100%);
+        }
+        .hero-container {
+            position: relative; z-index: 1; width: 90%; max-width: 1200px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .hero-content {
+            color: var(--white); max-width: 650px; padding: 40px;
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(8px);
+            border-left: 4px solid var(--primary); border-radius: 0 16px 16px 0;
+        }
+        .hero-content h1 { font-family: var(--font-serif); font-size: 4rem; line-height: 1.2; margin-bottom: 20px; }
+        .hero-content h1 span {
+            display: block; font-family: var(--font-sans); font-size: 0.4em;
+            letter-spacing: 0.3em; margin-bottom: 10px; color: #F0F0F0;
+        }
+        .hero-content p { font-size: 1.1rem; opacity: 0.95; margin-bottom: 30px; }
+        
+        .hero-vertical {
+            writing-mode: vertical-rl; font-family: var(--font-serif); font-size: 1.6rem;
+            color: rgba(255,255,255,0.9); letter-spacing: 0.5em;
+            border-right: 1px solid rgba(255,255,255,0.4); padding-right: 30px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Scroll Icon */
+        .scroll-indicator {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            color: var(--white); opacity: 0.8; z-index: 2;
+        }
+        .scroll-text { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; }
+        .scroll-icon {
+            width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            animation: pulse 2s infinite;
+        }
+        .scroll-icon svg { width: 20px; animation: bounce 2s infinite; }
+        
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); } 70% { box-shadow: 0 0 0 10px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+        /* --- 5. FEATURES --- */
+        .features { background: var(--bg-body); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card {
+            background: var(--white); padding: 40px; border-radius: var(--radius);
+            border: 1px solid #EAEAEA; position: relative; overflow: hidden;
+            transition: 0.4s;
+        }
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--primary);
+        }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+        
+        .feature-icon {
+            width: 70px; height: 70px; background: var(--bg-light); color: var(--primary-dark);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 25px;
+        }
+        .feature-icon svg { width: 35px; height: 35px; }
+        .feature-card h3 { margin-bottom: 15px; font-size: 1.3rem; color: var(--text-main); }
+        .feature-card p { color: var(--text-sub); font-size: 0.95rem; }
+
+        /* --- 6. ABOUT --- */
+        .about-row { display: flex; align-items: center; gap: 5%; margin-bottom: 80px; }
+        .about-image-container { flex: 0 0 55%; width: 55%; }
+        .about-content { flex: 0 0 40%; width: 40%; }
+        .about-img { border-radius: var(--radius); box-shadow: var(--shadow); width: 100%; height: 600px; }
+        .about-content h3 { font-family: var(--font-serif); font-size: 2rem; color: var(--primary-dark); margin-bottom: 25px; }
+
+        /* Company Table */
+        .company-profile { background: var(--bg-light); padding: 60px; border-radius: var(--radius); }
+        .company-table { width: 100%; border-collapse: collapse; }
+        .company-table th, .company-table td { padding: 18px 0; border-bottom: 1px solid rgba(69, 77, 61, 0.1); }
+        .company-table th { text-align: left; width: 30%; color: var(--primary-dark); font-weight: 700; }
+        .company-table td { color: var(--text-main); }
+
+        /* --- 7. EQUIPMENT --- */
+        .equipment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .equipment-card {
+            background: var(--white); border-radius: var(--radius); overflow: hidden;
+            box-shadow: 0 5px 15px rgba(78, 94, 72, 0.08); transition: 0.3s;
+        }
+        .equipment-card:hover { transform: translateY(-5px); }
+        .equipment-card img { width: 100%; height: 240px; object-fit: cover; }
+        .equipment-info { padding: 25px; }
+        .equipment-info h3 { font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 10px; font-weight: 700; }
+        .equipment-info p { font-size: 0.95rem; color: var(--text-sub); }
+
+        /* --- 8. GALLERY --- */
+        .gallery { background: var(--bg-light); }
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 280px); gap: 15px;
+        }
+        .gallery-item { position: relative; overflow: hidden; border-radius: var(--radius); cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; transition: 0.6s; }
+        .gallery-item:hover img { transform: scale(1.05); }
+        
+        /* Grid Layout */
+        .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+        .gallery-item:nth-child(2) { grid-column: span 1; grid-row: span 1; }
+        .gallery-item:nth-child(3) { grid-column: span 1; grid-row: span 1; }
+        .gallery-item:nth-child(4) { grid-column: span 2; grid-row: span 1; }
+
+        .overlay {
+            position: absolute; inset: 0; background: linear-gradient(to top, rgba(69, 77, 61, 0.8), transparent);
+            opacity: 0; transition: 0.3s; display: flex; align-items: flex-end; padding: 25px;
+        }
+        .gallery-item:hover .overlay { opacity: 1; }
+        .overlay h4 { color: white; transform: translateY(10px); transition: 0.3s; font-weight: 500; }
+        .gallery-item:hover .overlay h4 { transform: translateY(0); }
+
+        /* --- 9. TESTIMONIALS --- */
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .testimonial-card {
+            background: var(--bg-light); padding: 40px; border-radius: var(--radius);
+        }
+        .stars { color: #FFD700; margin-bottom: 15px; font-size: 0.9rem; }
+        .testimonial-quote { font-size: 1rem; font-style: italic; color: var(--text-main); margin-bottom: 25px; line-height: 1.6; }
+        .client-meta { display: flex; align-items: center; gap: 15px; border-top: 1px solid #dcdcdc; padding-top: 20px; margin-top: 20px; }
+        
+        .client-avatar {
+            width: 45px; height: 45px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; color: var(--white); font-family: var(--font-serif);
+            font-size: 1.1rem;
+        }
+        .client-info h4 { font-size: 0.95rem; margin-bottom: 2px; color: var(--text-main); }
+        .client-info span { font-size: 0.8rem; color: var(--text-sub); }
+
+        /* --- 10. CTA SECTION --- */
+        .cta {
+            /* Nền tối phía sau thẻ card để tạo độ sâu */
+            background: url('hero-bg.jpg') center/cover fixed no-repeat;
+            position: relative;
+            padding: 120px 0;
+        }
+        
+        /* Lớp phủ tối màu (Thay đổi từ đen sang xanh rêu tối) */
+        .cta::before {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(69, 77, 61, 0.9); /* Dark Olive Overlay */
+            z-index: 0;
+        }
+
+        /* Container chính dạng thẻ (Card) */
+        .cta-wrapper {
+            position: relative; z-index: 1;
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            display: block;
+        }
+
+        /* Thông tin liên hệ */
+        .cta-info {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 80px 40px;
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Họa tiết trang trí chìm */
+        .cta-info::after {
+            content: ''; position: absolute; bottom: -50px; right: -50px;
+            width: 200px; height: 200px;
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
+        }
+        .cta-info::before {
+            content: ''; position: absolute; top: -50px; left: -50px;
+            width: 300px; height: 300px;
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
+        }
+
+        .cta-info h2 {
+            font-family: var(--font-serif);
+            font-size: 2.8rem; margin-bottom: 20px;
+            position: relative; z-index: 1;
+        }
+
+        .cta-info p {
+            color: rgba(255,255,255,0.9); font-size: 1.1rem; line-height: 1.8;
+            margin-bottom: 40px; position: relative; z-index: 1;
+        }
+
+        .contact-details {
+            position: relative; z-index: 1;
+        }
+
+        .contact-details .label {
+            font-size: 0.9rem; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 10px;
+        }
+
+        .contact-details .phone {
+            font-family: var(--font-serif);
+            font-size: 3.5rem; font-weight: 700;
+            color: #FFF; 
+            line-height: 1; display: block; margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .submit-btn {
+            background: var(--primary-dark); 
+            color: var(--white);
+            border: none;
+            font-family: var(--font-sans); font-weight: 700; font-size: 1rem;
+            letter-spacing: 0.1em; cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(125, 151, 57, 0.2);
+            display: inline-block;
+        }
+        
+        .submit-btn:hover {
+            background: var(--white);
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(156, 185, 79, 0.3);
+        }
+
+        /* --- 11. FOOTER (UPDATED COLORS) --- */
+        footer { background: var(--footer-bg); color: #D0D6CE; padding: 80px 0 0; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 60px; }
+        .footer-brand h2 { color: var(--white); margin-bottom: 20px; font-family: var(--font-serif); }
+        .footer-title {
+            color: var(--white); font-weight: 700; margin-bottom: 25px;
+            display: inline-block; position: relative;
+        }
+        .footer-title::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 30px; height: 2px; background: var(--primary); }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a:hover { color: var(--primary); padding-left: 5px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 25px 0; text-align: center; font-size: 0.85rem; }
+
+        /* --- 12. RESPONSIVE (MOBILE) --- */
+        @media (max-width: 992px) {
+            .hero-content h1 { font-size: 3rem; }
+            .hero-vertical { display: none; }
+            
+            .cta-info { padding: 50px 30px; text-align: center; }
+            
+            .about-row { flex-direction: column; }
+            .about-image-container, .about-content { flex: 0 0 100%; width: 100%; }
+            .about-img { height: 400px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            /* Nav */
+            .nav-links {
+                position: fixed; top: var(--header-h); left: 0; width: 100%; height: 0;
+                background: var(--white); flex-direction: column; justify-content: flex-start;
+                padding: 0; overflow: hidden; transition: 0.4s; box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+            }
+            .nav-links.active { height: auto; padding: 30px 0; border-bottom: 1px solid #eee; }
+            .nav-links a { color: var(--text-main); font-size: 1.1rem; width: 100%; text-align: center; padding: 15px 0; }
+            .nav-links a:hover { background: var(--bg-light); color: var(--primary); }
+            header.scrolled .nav-links a { color: var(--text-main); }
+            .mobile-menu-btn { display: block; }
+
+            /* Hero */
+            .hero { background-attachment: scroll; } /* Fix mobile parallax */
+            .hero-content { padding: 30px 20px; background: rgba(69, 77, 61, 0.6); border-left: none; border-bottom: 4px solid var(--primary); border-radius: 12px; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .scroll-indicator { display: none; } /* Hide on short screens */
+
+            /* Sections */
+            .section-padding { padding: 60px 0; }
+            .section-title { font-size: 1.8rem; }
+            
+            /* Table */
+            .company-profile { padding: 30px 20px; }
+            .company-table th, .company-table td { display: block; width: 100%; }
+            .company-table th { padding-bottom: 5px; color: var(--primary-dark); }
+            .company-table td { padding-top: 0; padding-bottom: 20px; border: none; }
+            .company-table tr { border-bottom: 1px solid #dcdcdc; }
+
+            /* Gallery - Single Column for Visibility */
+            .gallery-grid { display: flex; flex-direction: column; gap: 20px; }
+            .gallery-item { height: 250px; }
+
+            /* CTA Fonts */
+            .cta-info h2 { font-size: 2rem; }
+            .contact-details .phone { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">株式会社たた市</a>
+                <ul class="nav-links">
+                    <li><a href="#features">特長</a></li>
+                    <li><a href="#about">会社案内</a></li>
+                    <li><a href="#equipment">設備・工場</a></li>
+                    <li><a href="#gallery">施工事例</a></li>
+                    <li><a href="#testimonials">お客様の声</a></li>
+                    <li><a href="#contact" class="nav-btn btn-primary" style="padding: 10px 25px; color: white;">お問い合わせ</a></li>
+                </ul>
+                <div class="mobile-menu-btn" aria-label="Menu">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content fade-in-up">
+                <h1>
+                    <span>New Japanese Modern</span>
+                    匠の技が織りなす、<br>新しい和の空間。
+                </h1>
+                <p>伝統の安らぎと現代の感性を融合。<br>畳・襖・クロス・内装工事なら株式会社たた市へ。</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a href="#contact" class="btn btn-primary">無料お見積り</a>
+                    <a href="#gallery" class="btn btn-outline">施工事例を見る</a>
+                </div>
+            </div>
+            <div class="hero-vertical fade-in-up" style="animation-delay: 0.2s;">
+                心安らぐ、イグサの香り
+            </div>
+        </div>
+        
+        <a href="#features" class="scroll-indicator">
+            <span class="scroll-text">SCROLL</span>
+            <div class="scroll-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+        </a>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section-padding features">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <span class="section-tag">Features</span>
+                <h2 class="section-title">たた市が選ばれる理由</h2>
+                <p class="section-desc">創業以来、地域密着で培った信頼と実績。細部までこだわる職人の技。</p>
+            </div>
+            
+            <div class="features-grid">
+                <!-- 1 -->
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 21c.5 -4.5 2.5 -8 7 -10" /><path d="M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12 9c0 1 0 3 2 5h3z" /></svg>
+                    </div>
+                    <h3>厳選された素材</h3>
+                    <p>産地にこだわり、色艶・香りに優れた高品質なイグサのみを使用。お客様に「本物」の価値と安らぎをお届けします。</p>
+                </div>
+                <!-- 2 -->
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11.414 10l-7.383 7.418a2.091 2.091 0 0 0 0 2.967a2.11 2.11 0 0 0 2.976 0l7.407 -7.385" /><path d="M18.121 15.293l2.586 -2.586a1 1 0 0 0 0 -1.414l-7.586 -7.586a1 1 0 0 0 -1.414 0l-2.586 2.586a1 1 0 0 0 0 1.414l7.586 7.586a1 1 0 0 0 1.414 0z" /></svg>
+                    </div>
+                    <h3>熟練の職人技</h3>
+                    <p>機械では調整しきれない微細な歪みも、熟練職人の手作業で調整。隙間のない美しい仕上がりを実現します。</p>
+                </div>
+                <!-- 3 -->
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                    </div>
+                    <h3>トータルサポート</h3>
+                    <p>畳だけでなく、襖、障子、クロスの張り替えなど、和室から洋室まで内装リフォームを一括でお任せいただけます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section-padding about">
+        <div class="container">
+            <div class="about-wrapper">
+                <div class="about-row fade-in-up">
+                    <div class="about-image-container">
+                        <img loading="lazy" src="about-img.jpg" alt="About Tataichi" class="about-img">
+                    </div>
+                    <div class="about-content">
+                        <span class="section-tag">Philosophy</span>
+                        <h3>空間に、<br>新しい息吹を。</h3>
+                        <p>株式会社たた市は、単に床材を張り替えるだけではありません。そこに住まうご家族が、毎日を心地よく過ごせる「空間の質」を高めることを使命としています。</p>
+                        <p>日本の気候風土に適した伝統素材と、現代のライフスタイルに合わせたデザイン。その両立を目指し、日々技術を磨いています。</p>
+                    </div>
+                </div>
+
+                <!-- Company Profile -->
+                <div class="company-profile fade-in-up">
+                    <div class="section-header" style="margin-bottom: 30px; text-align: left;">
+                        <span class="section-tag">Company Profile</span>
+                        <h3 style="font-size: 1.8rem; margin-top: 10px; color: var(--primary-dark);">会社案内</h3>
+                    </div>
+                    <table class="company-table">
+                        <tr><th>会社名</th><td>株式会社たた市</td></tr>
+                        <tr><th>代表者</th><td>代表取締役 井筒 慎哉</td></tr>
+                        <tr><th>事業内容</th><td>畳・襖・障子・クロス・各種内装工事</td></tr>
+                        <tr><th>所在地</th><td>〒587-0051 大阪府堺市美原区北余部156-2</td></tr>
+                        <tr><th>連絡先</th><td>TEL: 072-369-3888 / FAX: 072-369-3555</td></tr>
+                        <tr><th>Email</th><td>tataichisakai@yahoo.co.jp</td></tr>
+                        <tr><th>営業時間</th><td>8：00～18：00（定休日：日・祝）</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipment -->
+    <section id="equipment" class="section-padding equipment">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <span class="section-tag">Facilities</span>
+                <h2 class="section-title">設備・工場紹介</h2>
+                <p class="section-desc">最新鋭の機械設備と徹底した品質管理体制。</p>
+            </div>
+            
+            <div class="equipment-grid">
+                <!-- 1 -->
+                <div class="equipment-card fade-in-up">
+                    <img loading="lazy" src="machine-1.jpg" alt="Machine">
+                    <div class="equipment-info">
+                        <h3>最新鋭コンピュータ式畳製造機</h3>
+                        <p>ミリ単位の精密な寸法調整が可能な最新のマシンを導入。データに基づいた正確な裁断と縫製により、隙間のない完璧な仕上がりを実現します。</p>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="equipment-card fade-in-up">
+                    <img loading="lazy" src="factory-1.jpg" alt="Factory">
+                    <div class="equipment-info">
+                        <h3>清潔で広々とした自社工場</h3>
+                        <p>効率的かつ丁寧な作業を行うため、整理整頓（5S）を徹底した自社工場。大型の畳も余裕を持って扱える広さを確保しています。</p>
+                    </div>
+                </div>
+                <!-- 3 -->
+                <div class="equipment-card fade-in-up">
+                    <img loading="lazy" src="storage-1.jpg" alt="Storage">
+                    <div class="equipment-info">
+                        <h3>厳格な資材管理・保管庫</h3>
+                        <p>デリケートな天然素材である畳表（い草）や和紙は、温度・湿度が管理された専用スペースで保管。施工直前まで最高の状態を維持します。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="section-padding gallery">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <span class="section-tag">Our Works</span>
+                <h2 class="section-title">施工事例</h2>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in-up">
+                    <img loading="lazy" src="gallery-1.jpg" alt="Modern Room">
+                    <div class="overlay"><h4>モダン和室リフォーム</h4></div>
+                </div>
+                <div class="gallery-item fade-in-up">
+                    <img loading="lazy" src="gallery-2.jpg" alt="Ryokan">
+                    <div class="overlay"><h4>旅館 大広間</h4></div>
+                </div>
+                <div class="gallery-item fade-in-up">
+                    <img loading="lazy" src="gallery-3.jpg" alt="Detail">
+                    <div class="overlay"><h4>縁なし畳（琉球畳）</h4></div>
+                </div>
+                <div class="gallery-item fade-in-up">
+                    <img loading="lazy" src="gallery-4.jpg" alt="Tea Room">
+                    <div class="overlay"><h4>茶室・数寄屋建築</h4></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section-padding testimonials">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <span class="section-tag">Testimonials</span>
+                <h2 class="section-title">お客様の声</h2>
+            </div>
+
+            <div class="testimonial-grid">
+                <!-- 1 -->
+                <div class="testimonial-card fade-in-up">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-quote">"長年使っていた和室が、見違えるほど明るくなりました。新しいイグサの香りに家族みんな癒されています。"</p>
+                    <div class="client-meta">
+                        <div class="client-avatar" style="background-color: #E67E22;">田</div>
+                        <div class="client-info">
+                            <h4>田中 美咲 様</h4>
+                            <span>大阪府堺市 / 個人宅</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="testimonial-card fade-in-up">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-quote">"急な工期変更にも柔軟に対応していただき、大変助かりました。クロスの仕上がりも完璧で、施主様にも大変満足いただけました。"</p>
+                    <div class="client-meta">
+                        <div class="client-avatar" style="background-color: #3498DB;">山</div>
+                        <div class="client-info">
+                            <h4>山本 健一 様</h4>
+                            <span>工務店 現場監督</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3 -->
+                <div class="testimonial-card fade-in-up">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-quote">"賃貸マンションのリフォームで利用しました。コストパフォーマンスが良く、入居者様からの評判も上々です。"</p>
+                    <div class="client-meta">
+                        <div class="client-avatar" style="background-color: #9B59B6;">佐</div>
+                        <div class="client-info">
+                            <h4>佐藤 由紀子 様</h4>
+                            <span>不動産オーナー</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Contact Section (Modern Split-Card) -->
+    <section id="contact" class="cta">
+        <div class="container">
+            <div class="cta-wrapper fade-in-up">
+                
+                <!-- Main Info (Centered form removed) -->
+                <div class="cta-info" style="align-items: center; text-align: center; padding: 80px 40px; width: 100%;">
+                    <h2>お問い合わせ</h2>
+                    <p style="max-width: 600px; margin: 0 auto 40px auto; font-size: 1.1rem;">
+                        畳の表替えから大規模な内装リフォームまで。<br>
+                        伝統の技術と新しい感性で、<br>
+                        お客様の理想の空間づくりをお手伝いします。
+                    </p>
+                    <div class="contact-details" style="border-top: none; padding-top: 0; margin-top: 0;">
+                        <p class="label">お電話でのご相談</p>
+                        <span class="phone" style="font-size: 3.5rem;">072-369-3888</span>
+                        <p style="font-size: 1rem; opacity: 0.9; margin-top: 15px;">営業時間 8:00 - 18:00 (定休日: 日・祝)</p>
+                        <a href="mailto:tataichisakai@yahoo.co.jp" class="submit-btn" style="display: inline-block; width: auto; padding: 15px 40px; margin-top: 30px; border-radius: 50px; text-decoration: none;">メールでのお問い合わせ</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>株式会社たた市</h2>
+                    <p>大阪府堺市を拠点に、伝統の技と真心を込めたサービスで、快適な和の住まいづくりをお手伝いします。</p>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#header">ホーム</a></li>
+                        <li><a href="#about">会社案内</a></li>
+                        <li><a href="#equipment">設備・工場</a></li>
+                        <li><a href="#gallery">施工事例</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">新畳・表替え</a></li>
+                        <li><a href="#">琉球畳・縁なし畳</a></li>
+                        <li><a href="#">襖・障子 張替え</a></li>
+                        <li><a href="#">クロス・内装工事</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 class="footer-title">Contact Us</h4>
+                    <p>〒587-0051 大阪府堺市美原区北余部156-2</p>
+                    <p>TEL: 072-369-3888</p>
+                    <p>Email: tataichisakai@yahoo.co.jp</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kabushiki Kaisha Tata Ichi. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Header Logic
+        let lastScroll = 0;
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+            if (currentScroll > 20) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+            
+            if (currentScroll > lastScroll && currentScroll > 80) header.classList.add('header-hidden');
+            else header.classList.remove('header-hidden');
+            lastScroll = currentScroll;
+        });
+
+        // Mobile Menu
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const body = document.body;
+        
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+        
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+
+        // Preloader Logic
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => { preloader.classList.add('hidden'); }, 300);
+        });
+
+        // Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
